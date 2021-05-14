@@ -37,7 +37,7 @@ class Hedgehog {
       const { ivHex, cipherTextHex, walletObj } = result[0]
       const lookupKey = result[1]
 
-      const walletAddress = walletObj.getAddressString()
+      const walletAddress = walletObj.publicKey.toBase58();
 
       const authData = {
         iv: ivHex,

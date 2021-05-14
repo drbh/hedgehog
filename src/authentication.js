@@ -5,7 +5,7 @@
  */
 
 const bip39 = require('bip39')
-const hdkey = require('ethereumjs-wallet/hdkey')
+const solanaWeb3 = require("@solana/web3.js");
 const randomBytes = require('randombytes')
 const crypto = require('crypto')
 const Cipher = require('browserify-cipher/browser')
@@ -28,11 +28,8 @@ class Authentication {
   static generateWalletFromEntropy (entropy, path) {
     const seed = bip39.mnemonicToSeed(bip39.entropyToMnemonic(entropy))
 
-    // generate HD wallet, not necessary for authentication
-    const hdwallet = hdkey.fromMasterSeed(seed)
-
-    // wallet is an ethereumjs-wallet object
-    const wallet = hdwallet.derivePath(path).getWallet()
+    // wallet is an solanaWeb3.Account object
+    const wallet = new solanaWeb3.Account(seed);
 
     return wallet
   }
